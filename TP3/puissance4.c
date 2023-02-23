@@ -27,7 +27,7 @@ void afficher(int** maGrille,int taille) {
         break;
         case 1: printf("| X ");
         break;
-        case 0: printf("| O ");
+        case 2: printf("| O ");
         break;
       }
     }
@@ -70,17 +70,18 @@ int aGagne(int** maGrille,int taille) {
 
   int estPlein =1;
   for (int c=0;c < taille; c++) {
+    // Vérifier si le haut du puissance 4 est plein
   if (maGrille[taille-1][c] == -1) {
     estPlein = 0;
     }
   }
 
   if (verificationLignes(maGrille,taille) == 1 || verificationColonnes(maGrille,taille) == 1 || verificationDiag1(maGrille,taille) == 1 || verificationDiag2(maGrille,taille) == 1) {
-    joueur = 1;
+    joueur = 1; // joueur 1 gagne
     } else if (verificationLignes(maGrille,taille) == 2 || verificationColonnes(maGrille,taille) == 2 || verificationDiag1(maGrille,taille) == 2 || verificationDiag2(maGrille,taille) == 2) {
-      joueur = 2;
+      joueur = 2; // joueur 2 gagne
     } else if (estPlein) {
-      joueur = 0;
+      joueur = 0; // Match nul
     } else {
       joueur = -1; // Partie pas terminé
     }
@@ -107,7 +108,7 @@ int verificationLignes(int** maGrille,int taille) {
 int verificationColonnes(int** maGrille, int taille) {
   int joueur;
   
-  joueur =1;
+  joueur =-1;
   for (int j=0; j < taille; j++) {
     for (int i=0; i < taille-3; i++) {
       if (maGrille[i][j] !=-1 && maGrille[i][j] == maGrille[i+1][j] && maGrille[i+1][j] == maGrille[i+2][j] && maGrille[i+2][j] ==maGrille[i+3][j]) {
@@ -168,7 +169,7 @@ void tourDeJeu(int** maGrille,int taille) {
     while (!place) {
       place = jouer(maGrille,taille,joueur);
       if (!place) {
-        printf("-----Erreur de saisie----- Veuillez recommencer ");
+        printf("\n ඞ Erreur de saisie SUS ඞ\n");
 
       }
       afficher(maGrille,taille);
@@ -193,9 +194,9 @@ void tourDeJeu(int** maGrille,int taille) {
 
   // Fin de la partie
   if (res !=-1) {
-    printf("Le joueur %d a gagné",res);
+    printf("Le joueur %d a gagné \n",res);
   } else {
-    printf("Il y a match nul");
+    printf("Il y a match nul \n");
   }
 
 }
