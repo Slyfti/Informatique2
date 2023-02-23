@@ -69,3 +69,17 @@ int verificationDiag1(int** maGrille,int taille);
 /* Entrée(s) :  ... */
 /* Sortie(s) :  ... */
 int verificationDiag2(int** maGrille,int taille);
+
+/* Auteur :  */
+/* Date :  ...*/
+/* Résumé :  ...*/
+/* Entrée(s) :  ...*/
+/* Sortie(s) :  ...*/
+void tourDeJeu(int** maGrille,int taille);
+
+/* Auteur :  */
+/* Date :  ...*/
+/* Résumé :  ...*/
+/* Entrée(s) :  ...*/
+/* Sortie(s) :  ...*/
+void libere (int** maGrille,int taille);

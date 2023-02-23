@@ -3,8 +3,9 @@
 
 int main(){
     printf("C'est le puissance 4 ! \n");
-    int** grille = allouer(4);
-    initialiser(grille,4);
-    afficher(grille,4);
+    int** maGrille = allouer(4);
+    initialiser(maGrille,4);
+    afficher(maGrille,4);
+    tourDeJeu(maGrille,4);
     return 0;
 }

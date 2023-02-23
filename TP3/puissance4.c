@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/* corps des différentes fonctions/procédures */
+// corps des différentes fonctions/procédures
 int** allouer(int taille) {
   int** tab = malloc(taille * sizeof(int*));
   for (int i=0; i < taille; i++) {
@@ -37,25 +37,32 @@ void afficher(int** maGrille,int taille) {
 
 
 int jouer(int** maGrille,int taille, int joueur) {
+  int res;
   int colonne;
-  printf("Veuillez saisir une colonne comprise dans le tableau de taille %d", taille);
+  int i;
+  
+  res =0;
+  i = taille-1;
+
+  printf("Veuillez saisir une colonne ? \n");
   scanf("%d",&colonne);
 
-  if (colonne <0 && colonne > taille && maGrille[taille-1][colonne] != -1) {
-    printf("Erreur, Colonne pleine ou or terrain");
-    return 0;
-
+  if (colonne > taille-1 || colonne <0) {
+    res =0;
+  } else if (maGrille[0][colonne] != -1) {
+    res =0;
   } else {
-    // Déterminer ou placer la pièce : on part du bas et on regarde si c'est plein
-    int hauteur=0;
-    while (maGrille[hauteur][colonne] != -1) {
-      hauteur++;
+
+    while (i <-1 || !res) {
+      if (maGrille[i][colonne] == -1) {
+        maGrille[i][colonne] = joueur;
+        res =1;
+      } else {
+        i = i -1;
+      }
     }
-
-    maGrille[hauteur][colonne] = joueur;
-    return 1;
-
   }
+  return res;
 }
 
 int aGagne(int** maGrille,int taille) {
@@ -75,9 +82,9 @@ int aGagne(int** maGrille,int taille) {
     } else if (estPlein) {
       joueur = 0;
     } else {
-      joueur = -1; // Partie pas termin
+      joueur = -1; // Partie pas terminé
     }
-
+  return joueur;
 }
 
 int verificationLignes(int** maGrille,int taille) {
@@ -91,4 +98,113 @@ int verificationLignes(int** maGrille,int taille) {
     }
   }
   return joueur;
+
+
+
+}
+
+
+int verificationColonnes(int** maGrille, int taille) {
+  int joueur;
+  
+  joueur =1;
+  for (int j=0; j < taille; j++) {
+    for (int i=0; i < taille-3; i++) {
+      if (maGrille[i][j] !=-1 && maGrille[i][j] == maGrille[i+1][j] && maGrille[i+1][j] == maGrille[i+2][j] && maGrille[i+2][j] ==maGrille[i+3][j]) {
+        joueur = maGrille[i][j];
+      }
+    }
+  
+  }
+  return joueur;
+}
+
+int verificationDiag1(int** maGrille,int taille) {
+  int joueur;
+  joueur =-1;
+  for (int i=0; i< taille-3;i++) {
+    for (int j=3;j<taille;j++) {
+      if (maGrille[i][j] != -1 && maGrille[i][j] == maGrille[i+1][j-1] && maGrille[i+1][j-1] == maGrille[i+2][j-2] && maGrille[i+2][j-2] == maGrille[i+3][j-3]) {
+        joueur = maGrille[i][j];
+      }
+    }
+  }
+  return joueur;
+
+
+
+}
+
+int verificationDiag2(int** maGrille,int taille) {
+  int joueur;
+  joueur =-1;
+  for (int i=0; i< taille-3;i++) {
+    for (int j=0;j<taille;j++) {
+      if (maGrille[i][j] != -1 && maGrille[i][j] == maGrille[i+1][j+1] && maGrille[i+1][j+1] == maGrille[i+2][j+2] && maGrille[i+2][j+2] == maGrille[i+3][j+3]) {
+        joueur = maGrille[i][j];
+      }
+    }
+  }
+  return joueur;
+
+
+
+}
+
+void tourDeJeu(int** maGrille,int taille) {
+  int joueur;
+  int cptTour;
+  int res;
+  int place;
+
+  joueur =1;
+  cptTour = 0;
+  place =0;
+  res =-1;
+
+  // Tant qu'il n'y as pas de gagant et que la grille n'est pas entièremenet remplie
+  while (res ==-1 && cptTour != taille*taille) {
+
+    while (!place) {
+      place = jouer(maGrille,taille,joueur);
+      if (!place) {
+        printf("-----Erreur de saisie----- Veuillez recommencer ");
+
+      }
+      afficher(maGrille,taille);
+    }
+
+    // Compter les tours
+    cptTour++;
+
+    // Regarder si y'a un gagant
+    res = aGagne(maGrille,taille);
+
+    // On change de joueur
+    if (joueur==1) {
+      joueur =2;
+    } else {
+      joueur =1;
+    }
+
+    // On valide le placement du pion
+    place =0;
+  }
+
+  // Fin de la partie
+  if (res !=-1) {
+    printf("Le joueur %d a gagné",res);
+  } else {
+    printf("Il y a match nul");
+  }
+
+}
+
+
+void libere (int** maGrille,int taille) {
+  for (int i=0; i < taille; i++) {
+    free(maGrille[i]);
+  }
+  free(maGrille);
+
 }
