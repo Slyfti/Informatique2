@@ -10,7 +10,7 @@ int main(){
     int* tab = allouer(5);
     initialiser(tab,5);
     afficher(tab,5);
-    triBulles(tab,5);
+    triInsertion(tab,5);
     printf("\n");
     afficher(tab,5);
     

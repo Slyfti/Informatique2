@@ -29,3 +29,17 @@ void triBulles(int* monTab, int taille) {
         }
     }
 }
+
+
+void triInsertion(int* monTab, int taille) {
+    int j;
+    for (int i=1; i<taille;i++) {
+        int memo = monTab[i];
+        j = i;
+        while (j>0 || monTab[j-1] > monTab[i]) {
+            monTab[j] = monTab[j-1];
+            j = j-1;
+        }
+        monTab[j] = memo;
+    }
+}

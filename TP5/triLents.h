@@ -16,3 +16,10 @@ void triSelection(int* monTab, int taille);
 /* Entrée(s) : ... */
 /* Sortie(s) :  ...  */
 void triBulles(int* monTab, int taille);
+
+/* Auteur : ... */
+/* Date :   ... */
+/* Résumé : ... */
+/* Entrée(s) : ... */
+/* Sortie(s) :  ...  */
+void triInsertion(int* monTab, int taille);
