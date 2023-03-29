@@ -57,7 +57,7 @@ void creationJoueur(Joueur* j);
 /* Entrée(s) : ... */
 /* Sortie(s) :  ...  */
 
-void afficherJoueur(Joueur* j);
+void afficherJoueur(Joueur j);
 
 
 /* Auteur : ... */
@@ -76,3 +76,27 @@ void creationEquipe(Equipe* e);
 /* Sortie(s) :  ...  */
 
 void ajouterJoueur(Equipe* e,Joueur j);
+
+/* Auteur : ... */
+/* Date :   ... */
+/* Résumé : ... */
+/* Entrée(s) : ... */
+/* Sortie(s) :  ...  */
+
+void afficherEquipe(Equipe e);
+
+/* Auteur : ... */
+/* Date :   ... */
+/* Résumé : ... */
+/* Entrée(s) : ... */
+/* Sortie(s) :  ...  */
+
+Joueur meilleurButeur(Equipe e);
+
+/* Auteur : ... */
+/* Date :   ... */
+/* Résumé : ... */
+/* Entrée(s) : ... */
+/* Sortie(s) :  ...  */
+
+int compareEquipe(Equipe e1,Equipe e2);
