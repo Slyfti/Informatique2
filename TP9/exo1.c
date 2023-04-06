@@ -19,20 +19,19 @@ void csvToArray() {
 
             strToken = strtok(chaine,";");
             int id = 0;
-            while ( strToken != NULL ) {
+            while ( strToken != NULL && id <4) {
                 switch (id%4) {
-                    case 0: fprintf(json,"{\n\"id\":\"%s\",\n",strToken); id++; break;
-                    case 1: fprintf(json,"\"appelation\":\"%s\",\n",strToken); id++; break;
-                    case 2: fprintf(json,"\"taille\":\"%s\",\n",strToken); id++; break;
-                    case 3: fprintf(json,"\"prix\":\"%s\",\n},",strToken); id++; break;
+                    case 0: fprintf(json,"\n\t{\n\t\"id\":\"%s\",\n",strToken); id++; break;
+                    case 1: fprintf(json,"\t\"appelation\":\"%s\",\n",strToken); id++; break;
+                    case 2: fprintf(json,"\t\"taille\":\"%s\",\n",strToken); id++; break;
+                    case 3: fprintf(json,"\t\"prix\":\"%s\",\n\t},",strToken); id++; break;
                 }
-            printf ( "%s\n", strToken );
             // On demande le token suivant.
-            strToken = strtok( NULL,";");
+            strToken = strtok(NULL,";");
             }
 
         }
-        fprintf(json,"]");
+        fprintf(json,"\n]");
  
         fclose(fichier);
     }
